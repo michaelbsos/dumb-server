@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"io/ioutil"
 	"log"
 	"net/http"
 )
@@ -24,4 +25,11 @@ func httpHandler(w http.ResponseWriter, r *http.Request) {
 		fmt.Printf("%s: %s\n", n, v)
 	}
 	fmt.Println()
+
+	// Print body
+	body, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(string(body))
 }
